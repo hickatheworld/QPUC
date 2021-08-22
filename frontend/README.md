@@ -10,5 +10,5 @@ Run the `start` npm script to start the development server and the `build` npm s
 
 You can also run these scripts from the parent directory by prefixing `frontend:` to their names.
 
-## Progressw
+## Progress
 See `QPUC/frontend`'s [Projects page](https://github.com/hickatheworlds/QPUC/projects/2).
