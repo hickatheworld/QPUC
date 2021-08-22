@@ -11,4 +11,4 @@ Run the `start` npm script to start the server in development mode  and the `bui
 You can also run these scripts from the parent directory by prefixing `api:` to their names.
 
 ## Progress
-See `QPUC/api`'s [Projects page](https://github.com/hickatheworlds/QPUC/projects/).
+See `QPUC/api`'s [Projects page](https://github.com/hickatheworlds/QPUC/projects/3).
