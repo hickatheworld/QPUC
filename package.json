@@ -1,0 +1,15 @@
+{
+	"name": "qpuc",
+	"author": "Hicka",
+	"license": "MIT",
+	"version": "1.0.0",
+	"scripts": {
+		"api:start": "cd api && npm start",
+		"api:build": "cd api && npm build",
+		"frontend:start": "cd frontend && npm start",
+		"frontend:build": "cd frontend && npm run build",
+		"server:start": "cd server && npm start",
+		"server:build": "cd server && npm run build",
+		"setup": "cd api && npm install && cd ../frontend && npm install && cd ../server && npm install"
+	}
+}
