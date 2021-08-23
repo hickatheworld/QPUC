@@ -3,7 +3,7 @@ import { Schema, model } from 'mongoose';
 /**
  * A question in QPUC.
  */
-interface Question {
+export interface IQuestion {
 	/**
 	 * The possible answers to this question. The first one of the array is the correct answer.
 	 */
@@ -25,7 +25,7 @@ interface Question {
 	type: Number;
 }
 
-const Question = new Schema<Question>({
+const QuestionSchema = new Schema<IQuestion>({
 	answers: {
 		required: true,
 		type: [String]
@@ -41,4 +41,4 @@ const Question = new Schema<Question>({
 	}
 });
 
-export default model('question', Question);
+export const QuestionModel = model('question', QuestionSchema);
