@@ -9,6 +9,10 @@ interface Question {
 	 */
 	answers: string[];
 	/**
+	 * Optionnal labels to easily identify this question or group questions.
+	 */
+	label?: string[];
+	/**
 	 * The statement of this question.
 	 */
 	statement: string;
@@ -23,6 +27,7 @@ interface Question {
 
 const Question = new Schema<Question>({
 	answers: [String],
+	label: [String],
 	statement: String,
 	type: Number
 });
