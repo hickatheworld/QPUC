@@ -20,14 +20,14 @@ class Database {
 	async fetchQuestions(options?: FetchQuestionsOptions): Promise<void> {
 		const filter: FilterQuery<IQuestion> =
 			(options && options.labels)
-				? { label: { $all: options.labels } } // Only entries with all the specified labels will be returned.
+				? { labels: { $all: options.labels } } // Only entries with all the specified labels will be returned.
 				: {};
 		const query = QuestionModel.find(filter);
 		if (options && options.limit)
 			query.limit(Math.max(1, options.limit)); // Makes sure a decent limit is specified.
 		const docs = await query.exec();
 		// This gets rid of MongoDB properties.
-		return docs.map(({ answers, label, statement }) => ({ answers, label, statement }));
+		return docs.map(({ answers, labels, statement }) => ({ answers, labels, statement }));
 	}
 
 	async addQuestion(question: IQuestion): Promise<void> {

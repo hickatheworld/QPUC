@@ -11,7 +11,7 @@ export interface IQuestion {
 	/**
 	 * Optionnal labels to easily identify this question or group questions.
 	 */
-	label?: string[];
+	labels?: string[];
 	/**
 	 * The statement of this question.
 	 */
