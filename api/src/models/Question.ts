@@ -26,10 +26,19 @@ interface Question {
 }
 
 const Question = new Schema<Question>({
-	answers: [String],
+	answers: {
+		required: true,
+		type: [String]
+	},
 	label: [String],
-	statement: String,
-	type: Number
+	statement: {
+		required: true,
+		type: String
+	},
+	type: {
+		required: true,
+		type: Number
+	}
 });
 
 export default model('question', Question);
