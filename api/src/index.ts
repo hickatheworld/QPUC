@@ -1,9 +1,9 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
+import db from './db';
+require('dotenv').config();
 
 const server = express();
 
-server.get('/', (req, res) => {
-	res.send('Never gonna give you up, never gonna let you down.');
+db.connect(process.env.MONGO_URI).then(() => {
+	server.listen(process.env.PORT, () => console.log(`API Server listening on :${process.env.PORT}`));
 });
-
-server.listen(8080, () => console.log('Listening.'))
