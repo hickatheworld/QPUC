@@ -17,7 +17,7 @@ class Database {
 	 * Fetches questions form the database.
 	 * @param options 
 	 */
-	async fetchQuestions(options?: FetchQuestionsOptions): Promise<void> {
+	async fetchQuestions(options?: FetchQuestionsOptions): Promise<IQuestion[]> {
 		const filter: FilterQuery<IQuestion> =
 			(options && options.labels)
 				? { labels: { $all: options.labels } } // Only entries with all the specified labels will be returned.
