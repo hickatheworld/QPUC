@@ -30,7 +30,7 @@ const QuestionSchema = new Schema<IQuestion>({
 		required: true,
 		type: [String]
 	},
-	label: [String],
+	labels: [String],
 	statement: {
 		required: true,
 		type: String
