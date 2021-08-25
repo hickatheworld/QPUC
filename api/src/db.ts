@@ -1,4 +1,5 @@
 import mongoose, { FilterQuery } from 'mongoose';
+import { AdminModel, IAdmin } from './models/Admin';
 import { IQuestion, QuestionModel } from './models/Question';
 
 /**
@@ -32,6 +33,23 @@ class Database {
 
 	async addQuestion(question: IQuestion): Promise<void> {
 		return void QuestionModel.create(question);
+	}
+
+	/**
+	 * Adds an admin to the database.
+	 * @param admin The admin's credentials.
+	 * @returns 
+	 */
+	async addAdmin(admin: IAdmin): Promise<void> {
+		return void AdminModel.create(admin);
+	}
+
+	/**
+	 * Checks if an admin exists with a given username.
+	 * @param username The username to test
+	 */
+	async existsAdmin(username: string): Promise<boolean> {
+		return AdminModel.exists({ username });
 	}
 
 }
