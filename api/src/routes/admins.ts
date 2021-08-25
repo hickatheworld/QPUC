@@ -16,7 +16,6 @@ const router = new (<any>Router)();
  */
 router.put('/add', async (req: Request, res: Response) => {
 	let { username, password }: Record<string, string> = req.body;
-	console.log(req.body);
 	if (!username)
 		return res.send({ success: false, error: 'Must provide a \'username\'.' });
 	username = username.trim();
