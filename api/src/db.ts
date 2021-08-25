@@ -27,7 +27,7 @@ class Database {
 			query.limit(Math.max(1, options.limit)); // Makes sure a decent limit is specified.
 		const docs = await query.exec();
 		// This gets rid of MongoDB properties.
-		return docs.map(({ answers, labels, statement }) => ({ answers, labels, statement }));
+		return docs.map(({ answers, labels, statement, type }) => ({ answers, labels, statement, type }));
 	}
 
 	async addQuestion(question: IQuestion): Promise<void> {
