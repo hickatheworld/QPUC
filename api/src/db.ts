@@ -44,6 +44,14 @@ class Database {
 		return void AdminModel.create(admin);
 	}
 
+	/**
+	 * Checks if an admin exists with a given username.
+	 * @param username The username to test
+	 */
+	async existsAdmin(username: string): Promise<boolean> {
+		return AdminModel.exists({ username });
+	}
+
 }
 
 /**
