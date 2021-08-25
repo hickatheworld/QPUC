@@ -1,13 +1,13 @@
 import express, { Request, Response } from 'express';
 import db from './db';
-import adminRoutes from './routes/admin';
+import adminsRoutes from './routes/admins';
 import questionsRoutes from './routes/questions';
 require('dotenv').config();
 
 const server = express();
 server.use(express.json());
 
-server.use('/admin', adminRoutes);
+server.use('/admins', adminsRoutes);
 server.use('/questions', questionsRoutes);
 
 db.connect(process.env.MONGO_URI).then(() => {
