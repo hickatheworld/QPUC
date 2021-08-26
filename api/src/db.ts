@@ -7,6 +7,14 @@ import { IQuestion, QuestionModel } from './models/Question';
  */
 class Database {
 	/**
+	 * Admin manipulation methods.
+	 */
+	admins = admins;
+	/**
+	 * Question manipulation methods.
+	 */
+	questions = questions;
+	/**
 	 * Connectes mongoose to the database.
 	 * @param uri The connection URI to the database.
 	 */
@@ -14,11 +22,49 @@ class Database {
 		return void await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 	}
 
+}
+
+
+const admins = {
+	/**
+	 * Adds an admin to the database.
+	 * @param admin The admin's credentials.
+	 */
+	async add(admin: IAdmin): Promise<void> {
+		return void AdminModel.create(admin);
+	},
+	/**
+	 * Checks if an admin exists with a given username.
+	 * @param username The username to test
+	 */
+	async exists(username: string): Promise<boolean> {
+		return AdminModel.exists({ username });
+	},
+	/**
+	 * Gets an admin from the database.
+	 */
+	async get(username: string): Promise<IAdmin | undefined> {
+		const doc = await AdminModel.findOne({ username });
+		if (!doc)
+			return;
+		return { username: doc.username, password: doc.password };
+	}
+}
+
+/**
+ * Question manipulation methods.
+ */
+const questions = {
+	/**
+	 * Adds a question to the database.
+	 */
+	async add(question: IQuestion): Promise<void> {
+		return void QuestionModel.create(question);
+	},
 	/**
 	 * Fetches questions form the database.
-	 * @param options 
 	 */
-	async fetchQuestions(options?: FetchQuestionsOptions): Promise<IQuestion[]> {
+	async fetch(options?: FetchQuestionsOptions): Promise<IQuestion[]> {
 		const filter: FilterQuery<IQuestion> =
 			(options && options.labels)
 				? { labels: { $all: options.labels } } // Only entries with all the specified labels will be returned.
@@ -30,35 +76,6 @@ class Database {
 		// This gets rid of MongoDB properties.
 		return docs.map(({ answers, labels, statement, type }) => ({ answers, labels, statement, type }));
 	}
-
-	async addQuestion(question: IQuestion): Promise<void> {
-		return void QuestionModel.create(question);
-	}
-
-	/**
-	 * Adds an admin to the database.
-	 * @param admin The admin's credentials.
-	 * @returns 
-	 */
-	async addAdmin(admin: IAdmin): Promise<void> {
-		return void AdminModel.create(admin);
-	}
-
-	/**
-	 * Checks if an admin exists with a given username.
-	 * @param username The username to test
-	 */
-	async existsAdmin(username: string): Promise<boolean> {
-		return AdminModel.exists({ username });
-	}
-
-	async getAdmin(username: string): Promise<IAdmin | undefined> {
-		const doc = await AdminModel.findOne({ username });
-		if (!doc)
-			return;
-		return { username: doc.username, password: doc.password };
-	}
-
 }
 
 /**
