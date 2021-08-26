@@ -25,7 +25,7 @@ router.put('/add', async (req: Request, res: Response) => {
 		return res.send({ success: false, error: 'Must provide a \'password\'.' });
 	if (password.length < 8)
 		return res.send({ success: false, error: '\'password\' must be at least 8 characters long.' });
-	if (await db.existsAdmin(username))
+	if (await db.admins.exists(username))
 		return res.send({ success: false, error: `The username '${username}' is already taken.` });
 	bcrypt.genSalt((err, salt) => {
 		if (err)
@@ -33,7 +33,7 @@ router.put('/add', async (req: Request, res: Response) => {
 		bcrypt.hash(password, salt, async (err, hash) => {
 			if (err)
 				return res.send({ success: false, error: `bcrypt error: [${err.name}] ${err.message}` });
-			await db.addAdmin({ username, password: hash });
+			await db.admins.add({ username, password: hash });
 			res.send({ sucess: true });
 		});
 	});

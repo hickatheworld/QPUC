@@ -14,7 +14,7 @@ export default async function(req: Request, res: Response, next: Function): Prom
 		return void res.send({ success: false, error: 'Authorization header must be in the form of \'username:password\'' });
 	const username = authorization.substring(0, index);
 	const password = authorization.substring(index + 1);
-	const admin = await db.getAdmin(username);
+	const admin = await db.admins.get(username);
 	if (!admin)
 		return void res.send({ success: false, error: `Admin ${username} does not exist.` });
 	const valid = await bcrypt.compare(password, admin.password);
