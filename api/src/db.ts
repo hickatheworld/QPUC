@@ -52,6 +52,13 @@ class Database {
 		return AdminModel.exists({ username });
 	}
 
+	async getAdmin(username: string): Promise<IAdmin | undefined> {
+		const doc = await AdminModel.findOne({ username });
+		if (!doc)
+			return;
+		return { username: doc.username, password: doc.password };
+	}
+
 }
 
 /**
