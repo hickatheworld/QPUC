@@ -62,6 +62,16 @@ const questions = {
 		return void QuestionModel.create(question);
 	},
 	/**
+	 * Edits a question.
+	 * @param id The MongoID of the question to edit.
+	 * @param edits The changes to apply to the question.
+	 */
+	async edit(id: string, edits: Partial<IQuestion>): Promise<void> {
+		delete edits.id;
+		// If an id was passed in edits, we make sure not to pass it in the update query.
+		return void await QuestionModel.updateOne({ _id: id }, edits);
+	},
+	/**
 	 * Fetches questions form the database.
 	 */
 	async fetch(options?: FetchQuestionsOptions): Promise<IQuestion[]> {
