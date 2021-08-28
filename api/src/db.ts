@@ -73,8 +73,8 @@ const questions = {
 		if (options && options.limit)
 			query.limit(Math.max(1, options.limit)); // Makes sure a decent limit is specified.
 		const docs = await query.exec();
-		// This gets rid of MongoDB properties.
-		return docs.map(({ answers, labels, statement, type }) => ({ answers, labels, statement, type }));
+		// This gets rid of unwanted MongoDB properties.
+		return docs.map(({ answers, _id, labels, statement, type }) => ({ answers, id: _id.toString(), labels, statement, type }));
 	}
 }
 

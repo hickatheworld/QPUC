@@ -9,6 +9,10 @@ export interface IQuestion {
 	 */
 	answers: string[];
 	/**
+	 * The MongoID of this question.
+	 */
+	id?: string;
+	/**
 	 * Optionnal labels to easily identify this question or group questions.
 	 */
 	labels?: string[];
