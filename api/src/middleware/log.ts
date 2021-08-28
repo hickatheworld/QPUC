@@ -10,7 +10,7 @@ export default function(req: Request, _res: Response, next: Function): void {
 	let str = '';
 	str += `[${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}] `
 	str += `[${req.method} ${req.path}] `;
-	str += `Incoming request fron ${req.ip}`;
+	str += `Incoming request from ${req.ip}`;
 	for (const [key, value] of Object.entries(req.headers)) {
 		str += `\n  | ${key}: ${value}`;
 	}
