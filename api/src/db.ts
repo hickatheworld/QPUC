@@ -68,9 +68,14 @@ const questions = {
 	 * @returns Whether a question has sucessfully been edited.
 	 */
 	async edit(id: string, edits: Partial<IQuestion>): Promise<boolean> {
-		delete edits.id;
 		// If an id was passed in edits, we make sure not to pass it in the update query.
-		return (await QuestionModel.updateOne({ _id: id }, edits)).nModified > 0;
+		delete edits.id;
+		try {
+			const result = await QuestionModel.updateOne({ _id: id }, edits);
+			return result.nModified > 0;
+		} catch (err) {
+			return false;
+		}
 	},
 	/**
 	 * Fetches questions form the database.
