@@ -63,4 +63,32 @@ router.put('/add', async (req: Request, res: Response) => {
 	}
 });
 
+/**
+ * /questions/edit - Allows an admin to edit a question.
+ * Parameters:
+ *  - id: The MongoID of the questions.
+ * Body: Partial<IQuestion>
+ */
+router.patch('/edit/:id', async (req: Request, res: Response) => {
+	if (!req.params.id)
+		return res.send({ success: false, error: 'Please provide a correct question Id to edit.' });
+	const edits: Partial<IQuestion> = {};
+	if (req.body.answers) {
+		if (!Array.isArray(req.body.answers))
+			return res.send({ success: false, error: '\'answers\' must be a correct array.' });
+		else edits.answers = req.body.answers;
+	}
+	if (req.body.statement) {
+		if (typeof req.body.statement !== 'string')
+			return res.send({ success: false, error: '\'statement\' must be a correct string.' });
+		else edits.statement = req.body.statement;
+	}
+	if (req.body.labels) {
+		if (!Array.isArray(req.body.labels))
+			return res.send({ success: false, error: '\'labels\' must be a correct array.' });
+		else edits.labels = req.body.labels;
+	}
+	const success = await db.questions.edit(req.params.id, edits);
+	return res.send(success ? { success } : { success, error: 'Couldn\'t edit this question. You most probably provided an unexistent id.' });
+});
 export default router;
