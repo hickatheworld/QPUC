@@ -34,7 +34,7 @@ router.put('/add', async (req: Request, res: Response) => {
 			if (err)
 				return res.send({ success: false, error: `bcrypt error: [${err.name}] ${err.message}` });
 			await db.admins.add({ username, password: hash });
-			res.send({ sucess: true });
+			res.send({ success: true });
 		});
 	});
 });
