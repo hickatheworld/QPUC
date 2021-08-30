@@ -62,6 +62,19 @@ const questions = {
 		return void QuestionModel.create(question);
 	},
 	/**
+	 * Deletes a question from the database.
+	 * @param id The MongoID of the quesiton to delete.
+	 * @returns Whether a question has been deleted.
+	 */
+	async delete(id: string): Promise<boolean> {
+		try {
+			const result = await QuestionModel.deleteOne({ _id: id });
+			return result.deletedCount > 0;
+		} catch (err) {
+			return false;
+		}
+	},
+	/**
 	 * Edits a question.
 	 * @param id The MongoID of the question to edit.
 	 * @param edits The changes to apply to the question.
