@@ -91,4 +91,18 @@ router.patch('/edit/:id', async (req: Request, res: Response) => {
 	const success = await db.questions.edit(req.params.id, edits);
 	return res.send(success ? { success } : { success, error: 'Couldn\'t edit this question. You most probably provided an unexistent id.' });
 });
+
+/**
+ * /questions/delete - Deletes a question.
+ * Parameters:
+ *  - id: The MongoID of the question.
+ */
+router.delete('/delete/:id', async (req: Request, res: Response) => {
+	if (!req.params.id)
+		return res.send({ success: false, error: 'Please provide a correct question Id to edit.' });
+	const success = await db.questions.delete(req.params.id);
+	return res.send(success ? { success } : { success, error: 'Couldn\'t delete this question. You most probably provided an unexistent id.' });
+
+});
+
 export default router;
