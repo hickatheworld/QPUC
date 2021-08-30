@@ -34,9 +34,26 @@ router.put('/add', async (req: Request, res: Response) => {
 			if (err)
 				return res.send({ success: false, error: `bcrypt error: [${err.name}] ${err.message}` });
 			await db.admins.add({ username, password: hash });
-			res.send({ sucess: true });
+			res.send({ success: true });
 		});
 	});
+});
+
+/**
+ * /admin/delete - Deletes an admin.
+ * Parameters:
+ *  - username: The username of the admin.
+ */
+router.delete('/delete/:username', async (req: Request, res: Response) => {
+	if (!req.params.username)
+		return res.send({ success: false, error: 'Please provide a correct admin username to edit.' });
+	const toDelete = req.params.username;
+	const deleter = req.headers.authorization.substring(0, req.headers.authorization.indexOf(':'));
+	if (toDelete === deleter)
+		return res.send({ success: false, error: 'You can\'t delete your own account.' });
+	const success = await db.admins.delete(req.params.username);
+	return res.send(success ? { success } : { success, error: 'Couldn\'t delete this admin. You most probably provided an unexistent username.' });
+
 });
 
 export default router;

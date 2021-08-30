@@ -34,6 +34,19 @@ const admins = {
 		return void AdminModel.create(admin);
 	},
 	/**
+	 * Deletes an admin from the database.
+	 * @param username The username of the admin to delete.
+	 * @returns Whether an admin has been deleted.
+	 */
+	async delete(username: string): Promise<boolean> {
+		try {
+			const result = await AdminModel.deleteOne({ username });
+			return result.deletedCount > 0;
+		} catch (err) {
+			return false;
+		}
+	},
+	/**
 	 * Checks if an admin exists with a given username.
 	 * @param username The username to test
 	 */
@@ -62,6 +75,35 @@ const questions = {
 		return void QuestionModel.create(question);
 	},
 	/**
+	 * Deletes a question from the database.
+	 * @param id The MongoID of the quesiton to delete.
+	 * @returns Whether a question has been deleted.
+	 */
+	async delete(id: string): Promise<boolean> {
+		try {
+			const result = await QuestionModel.deleteOne({ _id: id });
+			return result.deletedCount > 0;
+		} catch (err) {
+			return false;
+		}
+	},
+	/**
+	 * Edits a question.
+	 * @param id The MongoID of the question to edit.
+	 * @param edits The changes to apply to the question.
+	 * @returns Whether a question has sucessfully been edited.
+	 */
+	async edit(id: string, edits: Partial<IQuestion>): Promise<boolean> {
+		// If an id was passed in edits, we make sure not to pass it in the update query.
+		delete edits.id;
+		try {
+			const result = await QuestionModel.updateOne({ _id: id }, edits);
+			return result.nModified > 0;
+		} catch (err) {
+			return false;
+		}
+	},
+	/**
 	 * Fetches questions form the database.
 	 */
 	async fetch(options?: FetchQuestionsOptions): Promise<IQuestion[]> {
@@ -73,8 +115,8 @@ const questions = {
 		if (options && options.limit)
 			query.limit(Math.max(1, options.limit)); // Makes sure a decent limit is specified.
 		const docs = await query.exec();
-		// This gets rid of MongoDB properties.
-		return docs.map(({ answers, labels, statement, type }) => ({ answers, labels, statement, type }));
+		// This gets rid of unwanted MongoDB properties.
+		return docs.map(({ answers, _id, labels, statement, type }) => ({ answers, id: _id.toString(), labels, statement, type }));
 	}
 }
 
