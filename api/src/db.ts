@@ -34,6 +34,19 @@ const admins = {
 		return void AdminModel.create(admin);
 	},
 	/**
+	 * Deletes an admin from the database.
+	 * @param username The username of the admin to delete.
+	 * @returns Whether an admin has been deleted.
+	 */
+	async delete(username: string): Promise<boolean> {
+		try {
+			const result = await AdminModel.deleteOne({ username });
+			return result.deletedCount > 0;
+		} catch (err) {
+			return false;
+		}
+	},
+	/**
 	 * Checks if an admin exists with a given username.
 	 * @param username The username to test
 	 */
