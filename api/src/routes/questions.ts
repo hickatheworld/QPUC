@@ -6,7 +6,7 @@ import { IQuestion } from '../models/Question';
 const router = new (<any>Router)();
 
 /**
- * /questions/get - Returns a list of questions
+ * /questions/get - Returns a list of questions.
  * Query parameters:
  *  - (optional) labels: Labels to filter the questions, separated with commas.
  *  - (optional) limit: The maximum amount of questions to return. Defaults to 50.
@@ -27,7 +27,7 @@ router.get('/get', async (req: Request, res: Response) => {
 });
 
 /**
- * /questions/add - Lets an admin add a question to the database.
+ * /questions/add - Adds a question to the database.
  * Body: IQuestion.
  */
 router.put('/add', async (req: Request, res: Response) => {
@@ -64,9 +64,9 @@ router.put('/add', async (req: Request, res: Response) => {
 });
 
 /**
- * /questions/edit - Allows an admin to edit a question.
+ * /questions/edit - Edits a question.
  * Parameters:
- *  - id: The MongoID of the questions.
+ *  - id: The MongoID of the question.
  * Body: Partial<IQuestion>
  */
 router.patch('/edit/:id', async (req: Request, res: Response) => {
