@@ -11,7 +11,16 @@ export default function(req: Request, _res: Response, next: Function): void {
 	str += `[${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}] `
 	str += `[${req.method} ${req.path}] `;
 	str += `Incoming request from ${req.ip}`;
+	str += '\n  |>Query'
+	for (const [key, value] of Object.entries(req.query)) {
+		str += `\n  | ${key}: ${value}`;
+	}
+	str += '\n  |>Headers'
 	for (const [key, value] of Object.entries(req.headers)) {
+		str += `\n  | ${key}: ${value}`;
+	}
+	str += '\n  |>Body'
+	for (const [key, value] of Object.entries(req.body)) {
 		str += `\n  | ${key}: ${value}`;
 	}
 	console.log(str);
