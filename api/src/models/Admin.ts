@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
 
 /**
- * A QPUC Admin.
+ * A TLMVPSC Admin.
  */
 export interface IAdmin {
 	/**

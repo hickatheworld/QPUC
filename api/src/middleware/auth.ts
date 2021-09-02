@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import db from '../db';
 
 // Authentication middleware
-// Every request to QPUC API requires an Authorization header in the form of `username:password`.
+// Every request to TLMVPSC API requires an Authorization header in the form of `username:password`.
 export default async function(req: Request, res: Response, next: Function): Promise<void> {
 	const { authorization } = req.headers;
 	if (!authorization)

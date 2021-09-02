@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
 
 /**
- * A question in QPUC.
+ * A question in TLMVPSC.
  */
 export interface IQuestion {
 	/**
