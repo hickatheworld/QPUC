@@ -19,6 +19,7 @@ server.use('/questions', questionsRoutes);
  * / - Endpoint just to check if given credentials are valid.
  */
 server.get('/', (req: Request, res: Response) => {
+	res.status(200);
 	res.send({ success: true });
 });
 
