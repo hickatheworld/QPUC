@@ -4,9 +4,11 @@ import authMiddle from './middleware/auth';
 import logMiddle from './middleware/log';
 import adminsRoutes from './routes/admins';
 import questionsRoutes from './routes/questions';
+import cors from 'cors';
 require('dotenv').config();
 
 const server = express();
+server.use(cors());
 server.use(express.json());
 server.use(logMiddle);
 server.use(authMiddle);
