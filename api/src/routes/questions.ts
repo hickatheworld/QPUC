@@ -31,6 +31,7 @@ router.get('/get', async (req: Request, res: Response) => {
  * Body: IQuestion.
  */
 router.put('/add', async (req: Request, res: Response) => {
+	res.status(400);
 	if (!Array.isArray(req.body.answers))
 		return res.send({ success: false, error: '\'answers\' must be a correct array.' });
 	if (req.body.answers.length !== 4)
@@ -49,8 +50,10 @@ router.put('/add', async (req: Request, res: Response) => {
 	}
 	try {
 		await db.questions.add(question);
+		res.status(201);
 		res.send(warn ? { success: true, warning: '\'labels\' is not a correct array. The questions has been added to the database with no label.' } : { success: true });
 	} catch (err) {
+		res.status(500);
 		res.send({ success: false, error: `Internal Error: ${err.toString()}` });
 	}
 });
@@ -62,6 +65,7 @@ router.put('/add', async (req: Request, res: Response) => {
  * Body: Partial<IQuestion>
  */
 router.patch('/edit/:id', async (req: Request, res: Response) => {
+	res.status(400);
 	if (!req.params.id)
 		return res.send({ success: false, error: 'Please provide a correct question Id to edit.' });
 	const edits: Partial<IQuestion> = {};
@@ -81,6 +85,7 @@ router.patch('/edit/:id', async (req: Request, res: Response) => {
 		else edits.labels = req.body.labels;
 	}
 	const success = await db.questions.edit(req.params.id, edits);
+	res.status(success ? 200 : 400);
 	return res.send(success ? { success } : { success, error: 'Couldn\'t edit this question. You most probably provided an unexistent id.' });
 });
 
@@ -90,9 +95,11 @@ router.patch('/edit/:id', async (req: Request, res: Response) => {
  *  - id: The MongoID of the question.
  */
 router.delete('/delete/:id', async (req: Request, res: Response) => {
+	res.status(400);
 	if (!req.params.id)
 		return res.send({ success: false, error: 'Please provide a correct question Id to edit.' });
 	const success = await db.questions.delete(req.params.id);
+	res.status(success ? 200 : 400);
 	return res.send(success ? { success } : { success, error: 'Couldn\'t delete this question. You most probably provided an unexistent id.' });
 
 });

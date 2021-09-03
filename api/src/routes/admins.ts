@@ -16,6 +16,7 @@ const router = new (<any>Router)();
  */
 router.put('/add', async (req: Request, res: Response) => {
 	let { username, password }: Record<string, string> = req.body;
+	res.status(400);
 	if (!username)
 		return res.send({ success: false, error: 'Must provide a \'username\'.' });
 	username = username.trim();
@@ -28,12 +29,14 @@ router.put('/add', async (req: Request, res: Response) => {
 	if (await db.admins.exists(username))
 		return res.send({ success: false, error: `The username '${username}' is already taken.` });
 	bcrypt.genSalt((err, salt) => {
+		res.status(500);
 		if (err)
 			return res.send({ success: false, error: `bcrypt error: [${err.name}] ${err.message}` });
 		bcrypt.hash(password, salt, async (err, hash) => {
 			if (err)
 				return res.send({ success: false, error: `bcrypt error: [${err.name}] ${err.message}` });
 			await db.admins.add({ username, password: hash });
+			res.status(201);
 			res.send({ success: true });
 		});
 	});
@@ -45,6 +48,7 @@ router.put('/add', async (req: Request, res: Response) => {
  *  - username: The username of the admin.
  */
 router.delete('/delete/:username', async (req: Request, res: Response) => {
+	res.status(400);
 	if (!req.params.username)
 		return res.send({ success: false, error: 'Please provide a correct admin username to edit.' });
 	const toDelete = req.params.username;
@@ -52,6 +56,7 @@ router.delete('/delete/:username', async (req: Request, res: Response) => {
 	if (toDelete === deleter)
 		return res.send({ success: false, error: 'You can\'t delete your own account.' });
 	const success = await db.admins.delete(req.params.username);
+	res.status(success ? 200 : 400);
 	return res.send(success ? { success } : { success, error: 'Couldn\'t delete this admin. You most probably provided an unexistent username.' });
 
 });
