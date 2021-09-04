@@ -49,6 +49,26 @@ class AdminPanel extends React.Component<{}, AdminPanelState> {
 		}
 	}
 
+	async deleteCard(id: string): Promise<boolean> {
+		if (!this.state.credentials || !this.state.questions)
+			return false;
+		try {
+			const res = await axios.delete(`${process.env.REACT_APP_API_URI}/questions/delete/${id}`, {
+				headers: {
+					'Authorization': `${this.state.credentials.username}:${this.state.credentials.password}`,
+				}
+			});
+			if (res.data.success) {
+				const questions = this.state.questions.filter(q => q.id !== id);
+				this.setState({ questions });
+				return true;
+			} else
+				return false;
+		} catch (err) {
+			return false;
+		}
+	}
+
 	render() {
 		if (this.state.connected) {
 			return (
@@ -56,7 +76,7 @@ class AdminPanel extends React.Component<{}, AdminPanelState> {
 					<div className='admin-panel-title'>
 						TLMVPSC - Admin Panel
 					</div>
-					<QuestionsList questions={this.state.questions}></QuestionsList>
+					<QuestionsList questions={this.state.questions} deleter={this.deleteCard.bind(this)}></QuestionsList>
 				</div>
 			);
 		}

@@ -1,0 +1,11 @@
+.questions-list {
+	position: relative;
+	width: 40%;
+	display: flex;
+	flex-direction: column;
+}
+
+.questions-list-title {
+	font: 44pt 'Candice';
+	text-align: center;
+}

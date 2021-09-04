@@ -1,0 +1,47 @@
+.question-card {
+	padding: 10px;
+	box-sizing: border-box;
+	border: 2px solid #ffffff90;
+	background: #ffffff50;
+	border-radius: 5px;
+	width: 100%;
+	margin: 10px 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.question-card .question-statement {
+	font: 17pt 'Montserrat Alternates';
+	margin-bottom: 5px;
+}
+
+.question-card .question-answers {
+	margin-bottom: 10px;
+}
+
+.question-card .question-answers .question-answer {
+	display: inline-block;
+	padding: 3px 10px;
+	margin: 0 3px;
+	background: #ffffff50;
+}
+
+.question-card .question-answers .question-answer:first-child {
+	background: #b1ffb191;
+}
+
+.question-card .question-labels .question-label {
+	display: inline-block;
+	border: 1px solid #fff;
+	background: #ffffff50;
+	padding: 3px 10px;
+	border-radius: 10em;
+	margin: 0 3px;
+}
+
+.question-card .question-card-actions div {
+	margin: 6px 0;
+	cursor: pointer;
+	user-select: none;
+}
