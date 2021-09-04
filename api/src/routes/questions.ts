@@ -49,9 +49,10 @@ router.put('/add', async (req: Request, res: Response) => {
 		else warn = true;
 	}
 	try {
-		await db.questions.add(question);
+		const q = await db.questions.add(question);
 		res.status(201);
-		res.send(warn ? { success: true, warning: '\'labels\' is not a correct array. The questions has been added to the database with no label.' } : { success: true });
+		const response = { success: true, question: q };
+		res.send(warn ? { ...response, warning: '\'labels\' is not a correct array. The questions has been added to the database with no label.' } : response);
 	} catch (err) {
 		res.status(500);
 		res.send({ success: false, error: `Internal Error: ${err.toString()}` });

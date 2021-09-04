@@ -71,8 +71,14 @@ const questions = {
 	/**
 	 * Adds a question to the database.
 	 */
-	async add(question: IQuestion): Promise<void> {
-		return void QuestionModel.create(question);
+	async add(question: IQuestion): Promise<IQuestion> {
+		const res = await QuestionModel.create(question);
+		return {
+			answers: res.answers,
+			id: res._id,
+			labels: res.labels,
+			statement: res.statement
+		};
 	},
 	/**
 	 * Deletes a question from the database.
