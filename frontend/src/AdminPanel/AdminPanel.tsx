@@ -25,7 +25,7 @@ class AdminPanel extends React.Component<{}, AdminPanelState> {
 		const username = this.usernameRef.current!.value;
 		const password = this.passwordRef.current!.value;
 		try {
-			const res = await axios.get(process.env.REACT_APP_API_URI!, {
+			await axios.get(process.env.REACT_APP_API_URI!, {
 				headers: {
 					'Authorization': `${username}:${password}`
 				}
