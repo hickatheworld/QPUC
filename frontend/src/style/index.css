@@ -26,6 +26,11 @@ input[type='text'], input[type='password'] {
 	color: #fff;
 }
 
+input[type='text']::placeholder, input[type='password']::placeholder {
+	color: #fff;
+	opacity: .5;
+}
+
 button, input[type='submit'] {
 	appearance: none;
 	font: 13pt 'Candice';

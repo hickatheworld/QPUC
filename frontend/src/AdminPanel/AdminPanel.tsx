@@ -67,8 +67,8 @@ class AdminPanel extends React.Component<{}, AdminPanelState> {
 					<div className='admin-panel-title'>Panneau Administrateur</div>
 					<div className='credentials-form'>
 						<div className='failed-connection' style={{ visibility: this.state.conFailed ? 'visible' : 'hidden' }}>Nom d'utilisateur ou mot de passe invalide</div>
-						<input type='text' id='username' name='username' ref={this.usernameRef} />
-						<input type='password' id='password' name='password' ref={this.passwordRef} />
+						<input type='text' id='username' name='username' ref={this.usernameRef} placeholder={'Nom d\'utilisateur'} />
+						<input type='password' id='password' name='password' ref={this.passwordRef} placeholder='Mot de passe' />
 						<button id='submit' onClick={this.connect.bind(this)}>Se connecter</button>
 					</div>
 				</div>
