@@ -23,6 +23,7 @@ router.get('/get', async (req: Request, res: Response) => {
 		// If the given parameter was not a valid integer, limit must remain undefined.
 		limit = parseInt(<string>req.query.limit) || undefined;
 	const questions = await db.questions.fetch({ labels, limit });
+	res.status(200);
 	res.send(questions);
 });
 
