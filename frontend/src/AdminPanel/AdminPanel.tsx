@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React from 'react';
+import '../style/AdminPanel.css';
 import AdminPanelState from '../types/AdminPanelState';
 import QuestionsList from './QuestionsList';
 
@@ -52,7 +53,7 @@ class AdminPanel extends React.Component<{}, AdminPanelState> {
 		if (this.state.connected) {
 			return (
 				<div>
-					<div id='title'>
+					<div className='admin-panel-title'>
 						TLMVPSC - Admin Panel
 					</div>
 					<QuestionsList questions={this.state.questions}></QuestionsList>
@@ -61,11 +62,15 @@ class AdminPanel extends React.Component<{}, AdminPanelState> {
 		}
 		else {
 			return (
-				<div className='credentials-form'>
-					{this.state.conFailed && <div className='failed-connection'>Nom d'utilisateur ou mot de passe invalide</div>}
-					<input type='text' id='username' name='username' ref={this.usernameRef} />
-					<input type='password' id='password' name='password' ref={this.passwordRef} />
-					<button id='submit' onClick={this.connect.bind(this)}>Se connecter</button>
+				<div className='admin-panel'>
+					<img src='/assets/main-logo.png' alt='TLMVPSC' className='admin-panel-logo' />
+					<div className='admin-panel-title'>Panneau Administrateur</div>
+					<div className='credentials-form'>
+						<div className='failed-connection' style={{ visibility: this.state.conFailed ? 'visible' : 'hidden' }}>Nom d'utilisateur ou mot de passe invalide</div>
+						<input type='text' id='username' name='username' ref={this.usernameRef} />
+						<input type='password' id='password' name='password' ref={this.passwordRef} />
+						<button id='submit' onClick={this.connect.bind(this)}>Se connecter</button>
+					</div>
 				</div>
 			);
 		}

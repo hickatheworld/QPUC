@@ -1,0 +1,36 @@
+.admin-panel-logo {
+	width: 30%;
+	min-width: 200px;
+	margin: 10px;
+	margin-left: 50%;
+	transform: translateX(-50%);
+}
+
+.admin-panel-title {
+	font-family: 'Candice';
+	font-size: clamp(1.75rem, -0.875rem + 8vw, 3.5rem);
+	text-align: center;
+	color: #fff;
+}
+
+.credentials-form {
+	width: 100%;
+	margin: 15px 0;
+	display: flex;
+	font-size: clamp(.75rem, -0.875rem + 8vw, 1rem);
+	flex-direction: column;
+	justify-items: center;
+	align-items: center;
+}
+
+.credentials-form .failed-connection {
+	margin: 5px 0;
+}
+
+.credentials-form input {
+	font-size: clamp(0.5rem, -0.875rem + 8vw, 1.5rem);
+}
+
+.credentials-form button {
+	font-size: clamp(1.0rem, -0.875rem + 8vw, 1.55rem);
+}
