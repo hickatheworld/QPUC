@@ -135,28 +135,30 @@ class AdminPanel extends React.Component<{}, AdminPanelState> {
 	render() {
 		if (this.state.connected) {
 			return (
-				<div>
+				<div className='admin-panel'>
 					<div className='admin-panel-title'>
 						TLMVPSC - Admin Panel
 					</div>
-					<QuestionsList
-						questions={this.state.questions}
-						deleter={this.deleteCard.bind(this)}
-						openCreateEditor={this.openCreateEditor.bind(this)}
-						openEditEditor={this.openEditEditor.bind(this)}
-					></QuestionsList>
-					<QuestionEditor
-						{...this.state.editorProps}
-						add={this.addQuestion.bind(this)}
-						close={this.closeEditor.bind(this)}
-						edit={this.editQuestion.bind(this)}
-					/>
+					<div className='admin-panel-grid'>
+						<QuestionsList
+							questions={this.state.questions}
+							deleter={this.deleteCard.bind(this)}
+							openCreateEditor={this.openCreateEditor.bind(this)}
+							openEditEditor={this.openEditEditor.bind(this)}
+						></QuestionsList>
+						<QuestionEditor
+							{...this.state.editorProps}
+							add={this.addQuestion.bind(this)}
+							close={this.closeEditor.bind(this)}
+							edit={this.editQuestion.bind(this)}
+						/>
+					</div>
 				</div>
 			);
 		}
 		else {
 			return (
-				<div className='admin-panel'>
+				<div className='admin-panel-login'>
 					<img src='/assets/main-logo.png' alt='TLMVPSC' className='admin-panel-logo' />
 					<div className='admin-panel-title'>Panneau Administrateur</div>
 					<div className='credentials-form'>

@@ -9,10 +9,11 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	min-width: 300px;
 }
 
 .question-card .question-statement {
-	font: 17pt 'Montserrat Alternates';
+	font: clamp(0.75rem, -0.875rem + 8vw, 1.5rem) 'Montserrat Alternates';
 	margin-bottom: 5px;
 }
 
@@ -25,6 +26,7 @@
 	padding: 3px 10px;
 	margin: 0 3px;
 	background: #ffffff50;
+	font-size: clamp(0.75rem, -0.875rem + 8vw, 1rem);
 }
 
 .question-card .question-answers .question-answer:first-child {
@@ -38,6 +40,7 @@
 	padding: 3px 10px;
 	border-radius: 10em;
 	margin: 0 3px;
+	font-size: clamp(0.75rem, -0.875rem + 8vw, 1rem);
 }
 
 .question-card .question-card-actions div {

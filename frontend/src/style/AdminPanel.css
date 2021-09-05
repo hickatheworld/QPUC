@@ -1,3 +1,10 @@
+.admin-panel-grid {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	flex-flow: column;
+}
+
 .admin-panel-logo {
 	width: 30%;
 	min-width: 200px;
@@ -7,10 +14,11 @@
 }
 
 .admin-panel-title {
-	font-family: 'Candice';
+	font-family: 'Montserrat Alternates';
 	font-size: clamp(1.75rem, -0.875rem + 8vw, 3.5rem);
 	text-align: center;
 	color: #fff;
+	margin-bottom: 10px;
 }
 
 .credentials-form {

@@ -1,11 +1,17 @@
 .questions-list {
 	position: relative;
 	width: 40%;
+	min-width: 330px;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	flex-grow: 1;
 }
 
 .questions-list .questions {
-	display: flex;
-	flex-direction: column;
+	box-sizing: border-box;
+	padding: 0 10px;
+	position: relative;
 }
 
 .questions-list-title {
@@ -15,9 +21,8 @@
 
 .questions-list .add-question {
 	display: inline-flex;
+	align-self: center;
 	border: 2px solid #fff;
-	margin-left: 50%;
-	transform: translateX(-50%);
 	border-radius: 50%;
 	cursor: pointer;
 	transition: background .1s ease;

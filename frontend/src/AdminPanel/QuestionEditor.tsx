@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import IQuestion from '../types/Question';
+import '../style/QuestionEditor.css';
 
 function QuestionEditor(props: { question?: IQuestion, mode: 'create' | 'edit' | 'hidden', add: (q: IQuestion) => void, close: () => void, edit: (q: IQuestion) => void }): React.ReactElement {
 	const statementRef = useRef<HTMLInputElement>(null);
@@ -47,10 +48,16 @@ function QuestionEditor(props: { question?: IQuestion, mode: 'create' | 'edit' |
 					<div className='question-editor-form-title'>Question</div>
 					<input type='text' name='statement' autoComplete='off' placeholder='Quelle est la recette des pâtes ?' ref={statementRef} defaultValue={props.question?.statement} />
 					<div className='question-editor-form-title'>Réponses</div>
-					<input type='text' name='a1' autoComplete='off' ref={a1Ref} placeholder='Réponse 1 (bonne réponse)' defaultValue={props.question && props.question.answers[0]} />
-					<input type='text' name='a2' autoComplete='off' ref={a2Ref} placeholder='Réponse 2' defaultValue={props.question && props.question.answers[1]} />
-					<input type='text' name='a3' autoComplete='off' ref={a3Ref} placeholder='Réponse 3' defaultValue={props.question && props.question.answers[2]} />
-					<input type='text' name='a4' autoComplete='off' ref={a4Ref} placeholder='Réponse 4' defaultValue={props.question && props.question.answers[3]} />
+					<div className='question-editor-answers'>
+						<div>
+							<input type='text' name='a1' autoComplete='off' ref={a1Ref} placeholder='Réponse 1 (bonne réponse)' defaultValue={props.question && props.question.answers[0]} />
+							<input type='text' name='a2' autoComplete='off' ref={a2Ref} placeholder='Réponse 2' defaultValue={props.question && props.question.answers[1]} />
+						</div>
+						<div>
+							<input type='text' name='a3' autoComplete='off' ref={a3Ref} placeholder='Réponse 3' defaultValue={props.question && props.question.answers[2]} />
+							<input type='text' name='a4' autoComplete='off' ref={a4Ref} placeholder='Réponse 4' defaultValue={props.question && props.question.answers[3]} />
+						</div>
+					</div>
 					<div className='question-editor-form-title'>Labels (séparés par virgule)</div>
 					<input type='text' name='labels' autoComplete='off' ref={labelsRef} placeholder='Clé, Géographie' defaultValue={props.question?.labels && props.question.labels.join(', ')} />
 					<button className='validate-question' onClick={(props.mode === 'create' ? add : edit)}>{props.mode === 'create' ? 'Ajouter' : 'Éditer'}</button>
