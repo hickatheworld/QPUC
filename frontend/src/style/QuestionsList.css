@@ -1,6 +1,9 @@
 .questions-list {
 	position: relative;
 	width: 40%;
+}
+
+.questions-list .questions {
 	display: flex;
 	flex-direction: column;
 }
@@ -8,4 +11,22 @@
 .questions-list-title {
 	font: 44pt 'Candice';
 	text-align: center;
+}
+
+.questions-list .add-question {
+	display: inline-flex;
+	border: 2px solid #fff;
+	margin-left: 50%;
+	transform: translateX(-50%);
+	border-radius: 50%;
+	cursor: pointer;
+	transition: background .1s ease;
+}
+
+.questions-list .add-question:hover {
+	background: #ffffff40;
+}
+
+.questions-list .add-question span {
+	font-size: 30pt;
 }

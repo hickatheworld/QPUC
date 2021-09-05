@@ -1,13 +1,8 @@
-import React, { useState } from 'react';
-import IQuestion from '../types/Question';
+import React from 'react';
 import '../style/QuestionCard.css';
+import IQuestion from '../types/Question';
 
-function QuestionCard(props: { q: IQuestion, del: () => Promise<boolean> }): React.ReactElement {
-	const [loading, setLoading] = useState(false);
-	const del = async () => {
-		setLoading(true);
-		props.del();
-	}
+function QuestionCard(props: { q: IQuestion, del: () => Promise<boolean>, edit: () => void }): React.ReactElement {
 	return (
 		<div className='question-card'>
 			<div className='question-card-conten'>
@@ -20,7 +15,7 @@ function QuestionCard(props: { q: IQuestion, del: () => Promise<boolean> }): Rea
 				</div>
 			</div>
 			<div className='question-card-actions'>
-				<div className='question-card-edit'>
+				<div className='question-card-edit' onClick={props.edit}>
 					<span className="material-icons">
 						edit
 					</span>

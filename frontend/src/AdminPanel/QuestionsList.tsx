@@ -3,10 +3,15 @@ import IQuestion from '../types/Question';
 import QuestionCard from './QuestionCard';
 import '../style/QuestionsList.css';
 
-function QuestionsList(props: { questions: IQuestion[] | null, deleter: (id: string) => Promise<boolean> }): React.ReactElement {
+function QuestionsList(props: { questions: IQuestion[] | null, deleter: (id: string) => Promise<boolean>, openCreateEditor: () => void, openEditEditor: (question: IQuestion) => void }): React.ReactElement {
 	return (
 		<div className='questions-list'>
 			<div className='questions-list-title'>Questions</div>
+			<div className='add-question' onClick={props.openCreateEditor}>
+				<span className="material-icons">
+					add
+				</span>
+			</div>
 			{(props.questions) ?
 				(props.questions.length === 0) ?
 					<div className='warn'>Il n'y a aucune question dans la base de données.</div>
@@ -15,7 +20,8 @@ function QuestionsList(props: { questions: IQuestion[] | null, deleter: (id: str
 						{props.questions.map(
 							q => <QuestionCard
 								q={q}
-								del={() => props.deleter(q.id)}
+								del={() => props.deleter(q.id!)}
+								edit={() => props.openEditEditor(q)}
 							/>
 						)}
 					</div>

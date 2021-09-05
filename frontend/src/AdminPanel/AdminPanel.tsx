@@ -2,6 +2,8 @@ import axios from 'axios';
 import React from 'react';
 import '../style/AdminPanel.css';
 import AdminPanelState from '../types/AdminPanelState';
+import IQuestion from '../types/Question';
+import QuestionEditor from './QuestionEditor';
 import QuestionsList from './QuestionsList';
 
 
@@ -14,6 +16,9 @@ class AdminPanel extends React.Component<{}, AdminPanelState> {
 			connected: false,
 			credentials: null,
 			conFailed: false,
+			editorProps: {
+				mode: 'hidden'
+			},
 			questions: null
 		};
 		this.usernameRef = React.createRef<HTMLInputElement>();
@@ -69,6 +74,64 @@ class AdminPanel extends React.Component<{}, AdminPanelState> {
 		}
 	}
 
+	async openCreateEditor() {
+		const editorProps = this.state.editorProps;
+		editorProps.question = undefined;
+		editorProps.mode = 'create';
+		this.setState({ editorProps });
+	}
+
+	async openEditEditor(question: IQuestion) {
+		this.setState({ editorProps: { question, mode: 'edit' } });
+	}
+
+	async addQuestion(question: IQuestion): Promise<void> {
+		try {
+			const res = await axios.put(`${process.env.REACT_APP_API_URI}/questions/add`, {
+				...question
+			}, {
+				headers: {
+					'Authorization': `${this.state.credentials?.username}:${this.state.credentials?.password}`
+				}
+			});
+			const questions = this.state.questions;
+			questions?.push(res.data.question);
+			this.setState({ editorProps: { mode: 'hidden' } });
+			return;
+		} catch (err: any) {
+			console.log(question);
+			console.error(err.response);
+			return;
+		}
+	}
+
+	async editQuestion(question: IQuestion): Promise<void> {
+		try {
+			const res = await axios.patch(`${process.env.REACT_APP_API_URI}/questions/edit/${question.id}`, {
+				...question
+			}, {
+				headers: {
+					'Authorization': `${this.state.credentials?.username}:${this.state.credentials?.password}`
+				}
+			});
+			const questions = this.state.questions;
+			if (!questions)
+				return;
+			const i = questions.findIndex(q => q.id === question.id) as number;
+			questions[i] = question;
+			this.setState({ editorProps: { mode: 'hidden' } });
+			return;
+		} catch (err: any) {
+			console.log(question);
+			console.error(err.response);
+			return;
+		}
+	}
+
+	closeEditor(): void {
+		this.setState({ editorProps: { mode: 'hidden' } });
+	}
+
 	render() {
 		if (this.state.connected) {
 			return (
@@ -76,7 +139,18 @@ class AdminPanel extends React.Component<{}, AdminPanelState> {
 					<div className='admin-panel-title'>
 						TLMVPSC - Admin Panel
 					</div>
-					<QuestionsList questions={this.state.questions} deleter={this.deleteCard.bind(this)}></QuestionsList>
+					<QuestionsList
+						questions={this.state.questions}
+						deleter={this.deleteCard.bind(this)}
+						openCreateEditor={this.openCreateEditor.bind(this)}
+						openEditEditor={this.openEditEditor.bind(this)}
+					></QuestionsList>
+					<QuestionEditor
+						{...this.state.editorProps}
+						add={this.addQuestion.bind(this)}
+						close={this.closeEditor.bind(this)}
+						edit={this.editQuestion.bind(this)}
+					/>
 				</div>
 			);
 		}
