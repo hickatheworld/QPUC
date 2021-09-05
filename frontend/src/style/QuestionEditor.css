@@ -1,0 +1,80 @@
+.question-editor {
+	position: relative;
+	box-sizing: border-box;
+	padding: 20px;
+	border-radius: 8px;
+	background: #ffffffbb;
+	box-shadow: 0px 10px 10px #00000050;
+	min-width: 300px;
+}
+
+.question-editor.hidden {
+	display: none;
+}
+
+.question-editor .question-editor-close {
+	position: absolute;
+	top: 18px;
+	right: 15px;
+	cursor: pointer;
+}
+
+.question-editor .question-editor-close span {
+	color: #000;
+	font-size: 22pt;
+}
+
+.question-editor .question-editor-title {
+	font-family: 'Candice';
+	font-size: clamp(1.5rem, -0.875rem + 8vw, 2rem);
+	color: #000;
+	text-align: center;
+}
+
+.question-editor .question-editor-form-title {
+	font: 14pt 'Montserrat Alternates';
+	color: #000;
+	margin: 10px 0;
+}
+
+.question-editor .question-editor-form input {
+	color: #000;
+	border-color: #000;
+	margin: 10px;
+	width: 200px;
+}
+
+.question-editor .question-editor-form input[name='statement'] {
+	width: 80%;
+}
+
+.question-editor .question-editor-form input::placeholder {
+	color: #000;
+}
+
+.question-editor .question-editor-form .question-editor-answers {
+	display: flex;
+	flex-direction: column;
+}
+
+.question-editor .question-editor-form .validate-question {
+	display: block;
+	margin-left: auto;
+	margin-right: 0;
+	background-color: #6802be;
+	color: #fff;
+	border-color: #6802be;
+	font-size: 14pt;
+	transition: .15s ease;
+}
+
+.question-editor .question-editor-form .validate-question:hover {
+	background-color: #6802be80;
+}
+
+@media screen and (max-width: 550px) {
+	.question-editor {
+		width: 90%;
+		text-align: center;
+	}
+}

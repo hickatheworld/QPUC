@@ -17,6 +17,10 @@ interface AdminPanelState {
 	 */
 	credentials: { username: string, password: string } | null;
 	/**
+	 * Props of the QuestionEditor.
+	 */
+	editorProps: { question?: IQuestion, mode: 'create' | 'edit' | 'hidden' };
+	/**
 	 * Questions loaded in the AdminPanel.
 	 */
 	questions: IQuestion[] | null;

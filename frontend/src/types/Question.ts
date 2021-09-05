@@ -9,7 +9,7 @@ export default interface IQuestion {
 	/**
 	 * The MongoID of this question.
 	 */
-	id: string;
+	id?: string;
 	/**
 	 * Optionnal labels to easily identify this question or group questions.
 	 */
