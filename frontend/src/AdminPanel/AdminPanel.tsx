@@ -42,7 +42,6 @@ class AdminPanel extends React.Component<{}, AdminPanelState> {
 				credentials: { username, password },
 				conFailed: false
 			});
-			console.log({ username, password });
 			const questions = await axios.get(`${process.env.REACT_APP_API_URI}/questions/get`, {
 				headers: {
 					'Authorization': `${username}:${password}`
@@ -54,9 +53,9 @@ class AdminPanel extends React.Component<{}, AdminPanelState> {
 		}
 	}
 
-	async deleteCard(id: string): Promise<boolean> {
+	async deleteCard(id: string): Promise<void> {
 		if (!this.state.credentials || !this.state.questions)
-			return false;
+			return;
 		try {
 			const res = await axios.delete(`${process.env.REACT_APP_API_URI}/questions/delete/${id}`, {
 				headers: {
@@ -66,11 +65,9 @@ class AdminPanel extends React.Component<{}, AdminPanelState> {
 			if (res.data.success) {
 				const questions = this.state.questions.filter(q => q.id !== id);
 				this.setState({ questions });
-				return true;
-			} else
-				return false;
-		} catch (err) {
-			return false;
+			}
+		} catch (_) {
+			return;
 		}
 	}
 
@@ -86,6 +83,8 @@ class AdminPanel extends React.Component<{}, AdminPanelState> {
 	}
 
 	async addQuestion(question: IQuestion): Promise<void> {
+		if (!this.state.questions)
+			return;
 		try {
 			const res = await axios.put(`${process.env.REACT_APP_API_URI}/questions/add`, {
 				...question
@@ -95,19 +94,19 @@ class AdminPanel extends React.Component<{}, AdminPanelState> {
 				}
 			});
 			const questions = this.state.questions;
-			questions?.push(res.data.question);
-			this.setState({ editorProps: { mode: 'hidden' } });
+			questions.push(res.data.question);
+			this.setState({ editorProps: { mode: 'hidden' }, questions });
 			return;
-		} catch (err: any) {
-			console.log(question);
-			console.error(err.response);
+		} catch (_) {
 			return;
 		}
 	}
 
 	async editQuestion(question: IQuestion): Promise<void> {
+		if (!this.state.questions)
+			return;
 		try {
-			const res = await axios.patch(`${process.env.REACT_APP_API_URI}/questions/edit/${question.id}`, {
+			await axios.patch(`${process.env.REACT_APP_API_URI}/questions/edit/${question.id}`, {
 				...question
 			}, {
 				headers: {
@@ -115,16 +114,10 @@ class AdminPanel extends React.Component<{}, AdminPanelState> {
 				}
 			});
 			const questions = this.state.questions;
-			if (!questions)
-				return;
-			const i = questions.findIndex(q => q.id === question.id) as number;
+			const i = questions.findIndex(q => q.id === question.id);
 			questions[i] = question;
-			this.setState({ editorProps: { mode: 'hidden' } });
-			return;
-		} catch (err: any) {
-			console.log(question);
-			console.error(err.response);
-			return;
+			this.setState({ editorProps: { mode: 'hidden' }, questions });
+		} catch (_) {
 		}
 	}
 
@@ -142,7 +135,7 @@ class AdminPanel extends React.Component<{}, AdminPanelState> {
 					<div className='admin-panel-grid'>
 						<QuestionsList
 							questions={this.state.questions}
-							deleter={this.deleteCard.bind(this)}
+							deleteQuestion={this.deleteCard.bind(this)}
 							openCreateEditor={this.openCreateEditor.bind(this)}
 							openEditEditor={this.openEditEditor.bind(this)}
 						></QuestionsList>
