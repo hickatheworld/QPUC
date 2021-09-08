@@ -1,9 +1,9 @@
 import React from 'react';
-import IQuestion from '../../types/Question';
+import IQuestion from '../../types/IQuestion';
 import QuestionCard from './QuestionCard';
 import '../../style/QuestionsList.css';
 
-function QuestionsList(props: { questions: IQuestion[] | null, deleteQuestion: (id: string) => Promise<void>, openCreateEditor: () => void, openEditEditor: (question: IQuestion) => void }): React.ReactElement {
+function QuestionsList(props: QuestionsListProps): React.ReactElement {
 	return (
 		<div className='questions-list'>
 			<div className='questions-list-title'>Questions</div>
@@ -32,5 +32,23 @@ function QuestionsList(props: { questions: IQuestion[] | null, deleteQuestion: (
 		</div>
 	);
 }
-
 export default QuestionsList;
+
+interface QuestionsListProps {
+	/**
+	 * Deletes a question from the database.
+	 */
+	deleteQuestion: (id: string) => Promise<void>;
+	/**
+	 * Opens the QuestionEditor in `create` mode.
+	 */
+	openCreateEditor: () => void;
+	/**
+	 * Opens the QuestionEditor in `edit` mode.
+	 */
+	openEditEditor: (question: IQuestion) => void;
+	/**
+	 * The loaded questions to display.
+	 */
+	questions: IQuestion[] | null;
+}

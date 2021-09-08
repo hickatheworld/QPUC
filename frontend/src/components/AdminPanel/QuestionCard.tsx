@@ -1,8 +1,8 @@
 import React from 'react';
 import '../../style/QuestionCard.css';
-import IQuestion from '../../types/Question';
+import IQuestion from '../../types/IQuestion';
 
-function QuestionCard(props: { question: IQuestion, del: () => Promise<void>, edit: () => void }): React.ReactElement {
+function QuestionCard(props: QuestionCardProps): React.ReactElement {
 	return (
 		<div className='question-card'>
 			<div className='question-card-conten'>
@@ -29,5 +29,19 @@ function QuestionCard(props: { question: IQuestion, del: () => Promise<void>, ed
 		</div>
 	);
 }
-
 export default QuestionCard;
+
+interface QuestionCardProps {
+	/**
+	 * Function to call when the user wants to delete the question.
+	 */
+	del: () => Promise<void>;
+	/**
+	 * Function to call when the user wants to edit the question.
+	 */
+	edit: () => void;
+	/**
+	 * The data of the question this card is displaying.
+	 */
+	question: IQuestion;
+}

@@ -1,8 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import '../../style/AdminPanel.css';
-import AdminPanelState from '../../types/AdminPanelState';
-import IQuestion from '../../types/Question';
+import IQuestion from '../../types/IQuestion';
 import QuestionEditor from './QuestionEditor';
 import QuestionsList from './QuestionsList';
 
@@ -166,3 +165,29 @@ class AdminPanel extends React.Component<{}, AdminPanelState> {
 	}
 }
 export default AdminPanel;
+
+/**
+ * State of an AdminPanel component.
+ */
+interface AdminPanelState {
+	/**
+	 * Wether an attempt to connect has been done and has failed.
+	 */
+	conFailed: boolean;
+	/**
+	 * Whether the component has correct credentials for  the API.
+	 */
+	connected: boolean;
+	/**
+	 * The credentials used to request the API.
+	 */
+	credentials: { username: string, password: string } | null;
+	/**
+	 * Props of the QuestionEditor.
+	 */
+	editorProps: { question?: IQuestion, mode: 'create' | 'edit' | 'hidden' };
+	/**
+	 * Questions loaded in the AdminPanel.
+	 */
+	questions: IQuestion[] | null;
+}

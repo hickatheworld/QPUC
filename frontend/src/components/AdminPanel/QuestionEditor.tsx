@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
-import IQuestion from '../../types/Question';
+import IQuestion from '../../types/IQuestion';
 import '../../style/QuestionEditor.css';
 
-function QuestionEditor(props: { question?: IQuestion, mode: 'create' | 'edit' | 'hidden', add: (q: IQuestion) => void, close: () => void, edit: (q: IQuestion) => void }): React.ReactElement {
+function QuestionEditor(props: QuestionEditorProps): React.ReactElement {
 	const statementRef = useRef<HTMLInputElement>(null);
 	const a1Ref = useRef<HTMLInputElement>(null);
 	const a2Ref = useRef<HTMLInputElement>(null);
@@ -66,5 +66,30 @@ function QuestionEditor(props: { question?: IQuestion, mode: 'create' | 'edit' |
 		</div>
 	);
 }
-
 export default QuestionEditor;
+
+interface QuestionEditorProps {
+	/**
+	 * Makes an API call to add a question to the database.
+	 */
+	add: (q: IQuestion) => void;
+	/**
+	 * Closes the editor.
+	 */
+	close: () => void;
+	/**
+	 * Makes an API call to edit the question.
+	 */
+	edit: (q: IQuestion) => void;
+	/**
+	 * The mode of the editor. Can be:
+	 *  - `create`: To add a question to the database.
+	 *  - `edit`: To edit an existing question.
+	 *  - `hidden`: When the editor is not being used.
+	 */
+	mode: 'create' | 'edit' | 'hidden';
+	/**
+	 * The current data of the question to edit. Defined in `edit` mode only.
+	 */
+	question?: IQuestion;
+}
