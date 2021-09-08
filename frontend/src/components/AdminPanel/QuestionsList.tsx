@@ -1,7 +1,7 @@
 import React from 'react';
-import IQuestion from '../types/Question';
+import IQuestion from '../../types/Question';
 import QuestionCard from './QuestionCard';
-import '../style/QuestionsList.css';
+import '../../style/QuestionsList.css';
 
 function QuestionsList(props: { questions: IQuestion[] | null, deleteQuestion: (id: string) => Promise<void>, openCreateEditor: () => void, openEditEditor: (question: IQuestion) => void }): React.ReactElement {
 	return (

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
-import IQuestion from '../types/Question';
-import '../style/QuestionEditor.css';
+import IQuestion from '../../types/Question';
+import '../../style/QuestionEditor.css';
 
 function QuestionEditor(props: { question?: IQuestion, mode: 'create' | 'edit' | 'hidden', add: (q: IQuestion) => void, close: () => void, edit: (q: IQuestion) => void }): React.ReactElement {
 	const statementRef = useRef<HTMLInputElement>(null);

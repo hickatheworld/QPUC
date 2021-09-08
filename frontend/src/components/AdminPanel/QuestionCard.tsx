@@ -1,6 +1,6 @@
 import React from 'react';
-import '../style/QuestionCard.css';
-import IQuestion from '../types/Question';
+import '../../style/QuestionCard.css';
+import IQuestion from '../../types/Question';
 
 function QuestionCard(props: { question: IQuestion, del: () => Promise<void>, edit: () => void }): React.ReactElement {
 	return (
