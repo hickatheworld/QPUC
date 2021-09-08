@@ -5,7 +5,6 @@ import IQuestion from '../../types/IQuestion';
 import QuestionEditor from './QuestionEditor';
 import QuestionsList from './QuestionsList';
 
-
 class AdminPanel extends React.Component<{}, AdminPanelState> {
 	usernameRef: React.RefObject<HTMLInputElement>;
 	passwordRef: React.RefObject<HTMLInputElement>;
