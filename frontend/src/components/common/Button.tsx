@@ -26,12 +26,12 @@ function Button(props: ButtonProps): React.ReactElement {
 		setBodyCSS({ color: props.textColor || '#000' });
 	};
 	return (
-		<div className={`button${props.loading ? ' loading' : ''} ${props.className || ''}`} onClick={props.onClick} style={buttonCSS} onMouseEnter={hoverIn} onMouseLeave={hoverOut}>
+		<button className={`button${props.loading ? ' loading' : ''} ${props.className || ''}`} onClick={props.onClick} style={buttonCSS} onMouseEnter={hoverIn} onMouseLeave={hoverOut}>
 			<LoadingIndicator size={8} color={props.backgroundColor} />
 			<div className='button-text' style={bodyCSS}>
 				{props.children}
 			</div>
-		</div>
+		</button>
 	);
 }
 export default Button;
