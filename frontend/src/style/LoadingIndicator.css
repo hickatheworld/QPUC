@@ -1,0 +1,25 @@
+.loading-indicator {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.loading-indicator-dot {
+	background: #fff;
+	border-radius: 50%;
+	animation: dot-animation 1s ease-in-out infinite;
+}
+
+.loading-indicator-dot.second {
+	animation-delay: .1s;
+}
+
+.loading-indicator-dot.third {
+	animation-delay: .2s;
+}
+
+@keyframes dot-animation {
+	50% {
+		transform: scale(1.3);
+	}
+}
