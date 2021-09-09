@@ -25,16 +25,6 @@
 }
 
 .question-editor .question-editor-form .validate-question {
-	display: block;
 	margin-left: auto;
 	margin-right: 0;
-	background-color: #6802be;
-	color: #fff;
-	border-color: #6802be;
-	font-size: 14pt;
-	transition: .15s ease;
-}
-
-.question-editor .question-editor-form .validate-question:hover {
-	background-color: #6802be80;
 }

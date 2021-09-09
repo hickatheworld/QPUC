@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import IQuestion from '../../types/IQuestion';
 import '../../style/QuestionEditor.css';
 import DialogBox from '../common/DialogBox';
+import Button from '../common/Button';
 
 function QuestionEditor(props: QuestionEditorProps): React.ReactElement {
 	const statementRef = useRef<HTMLInputElement>(null);
@@ -57,7 +58,12 @@ function QuestionEditor(props: QuestionEditorProps): React.ReactElement {
 				</div>
 				<div className='question-editor-form-title'>Labels (séparés par virgule)</div>
 				<input type='text' name='labels' autoComplete='off' ref={labelsRef} placeholder='Clé, Géographie' defaultValue={props.question?.labels && props.question.labels.join(', ')} />
-				<button className='validate-question' onClick={(props.mode === 'create' ? add : edit)}>{props.mode === 'create' ? 'Ajouter' : 'Éditer'}</button>
+				<Button className='validate-question'
+					backgroundColor='#6802be' textColor='#fff'
+					onClick={(props.mode === 'create' ? add : edit)}
+				>
+					{props.mode === 'create' ? 'Ajouter' : 'Éditer'}
+				</Button>
 			</div>
 		</DialogBox>
 	);

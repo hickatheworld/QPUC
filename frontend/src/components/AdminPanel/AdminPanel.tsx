@@ -2,6 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import '../../style/AdminPanel.css';
 import IQuestion from '../../types/IQuestion';
+import Button from '../common/Button';
 import QuestionEditor from './QuestionEditor';
 import QuestionsList from './QuestionsList';
 
@@ -156,7 +157,7 @@ class AdminPanel extends React.Component<{}, AdminPanelState> {
 						<div className='failed-connection' style={{ visibility: this.state.conFailed ? 'visible' : 'hidden' }}>Nom d'utilisateur ou mot de passe invalide</div>
 						<input type='text' id='username' name='username' ref={this.usernameRef} placeholder={'Nom d\'utilisateur'} />
 						<input type='password' id='password' name='password' ref={this.passwordRef} placeholder='Mot de passe' />
-						<button id='submit' onClick={this.connect.bind(this)}>Se connecter</button>
+						<Button onClick={this.connect.bind(this)}>Se connecter</Button>
 					</div>
 				</div>
 			);
