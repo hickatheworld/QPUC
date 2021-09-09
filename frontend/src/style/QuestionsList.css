@@ -26,16 +26,4 @@
 .questions-list .add-question {
 	display: inline-flex;
 	align-self: center;
-	border: 2px solid #fff;
-	border-radius: 50%;
-	cursor: pointer;
-	transition: background .1s ease;
-}
-
-.questions-list .add-question:hover {
-	background: #ffffff40;
-}
-
-.questions-list .add-question span {
-	font-size: 30pt;
 }

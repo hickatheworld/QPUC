@@ -1,0 +1,56 @@
+.icon-button {
+	position: relative;
+	appearance: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 3px solid #fff;
+	border-radius: 10em;
+	background: transparent;
+	cursor: pointer;
+	transition: background .1s ease, width .3s ease;
+}
+
+.icon-button.discreet {
+	border: none;
+}
+
+.icon-button.discreet::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #ffffff50;
+	border-radius: 50%;
+	opacity: 0;
+	transform: scale(0);
+	transition: transform 0s ease .2s, opacity .2s;
+}
+
+.icon-button.discreet:active::before {
+	opacity: 1;
+	transform: scale(1);
+	transition: transform .1s ease, opacity 0s;
+}
+
+.icon-button .loading-indicator {
+	z-index: 0;
+	position: absolute;
+	opacity: 0;
+	transition: opacity .3s ease;
+}
+
+.icon-button span {
+	z-index: 1;
+	transition: opacity .3s ease;
+}
+
+.icon-button.loading .loading-indicator {
+	opacity: 1;
+}
+
+.icon-button.loading span {
+	opacity: 0;
+}

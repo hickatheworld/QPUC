@@ -1,6 +1,7 @@
 import React from 'react';
 import '../../style/QuestionCard.css';
 import IQuestion from '../../types/IQuestion';
+import IconButton from '../common/IconButton';
 
 function QuestionCard(props: QuestionCardProps): React.ReactElement {
 	return (
@@ -15,16 +16,8 @@ function QuestionCard(props: QuestionCardProps): React.ReactElement {
 				</div>
 			</div>
 			<div className='question-card-actions'>
-				<div className='question-card-edit' onClick={props.edit}>
-					<span className="material-icons">
-						edit
-					</span>
-				</div>
-				<div className='question-card-delete' onClick={props.del}>
-					<span className="material-icons">
-						delete
-					</span>
-				</div>
+				<IconButton icon='edit' type='discreet' onClick={props.edit} size={24}></IconButton>
+				<IconButton icon='delete' type='discreet' onClick={props.del} size={24}></IconButton>
 			</div>
 		</div>
 	);

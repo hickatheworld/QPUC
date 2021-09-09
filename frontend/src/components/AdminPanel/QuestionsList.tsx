@@ -2,16 +2,13 @@ import React from 'react';
 import IQuestion from '../../types/IQuestion';
 import QuestionCard from './QuestionCard';
 import '../../style/QuestionsList.css';
+import IconButton from '../common/IconButton';
 
 function QuestionsList(props: QuestionsListProps): React.ReactElement {
 	return (
 		<div className='questions-list'>
 			<div className='questions-list-title'>Questions</div>
-			<div className='add-question' onClick={props.openCreateEditor}>
-				<span className="material-icons">
-					add
-				</span>
-			</div>
+			<IconButton icon='add' onClick={props.openCreateEditor} size={36} className='add-question'></IconButton>
 			{(props.questions) ?
 				(props.questions.length === 0) ?
 					<div className='warn'>Il n'y a aucune question dans la base de données.</div>

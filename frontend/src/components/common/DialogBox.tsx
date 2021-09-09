@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../style/DialogBox.css';
+import IconButton from './IconButton';
 
 function DialogBox(props: DialogBoxProps): React.ReactElement {
 	window.addEventListener('keydown', e => {
@@ -11,9 +12,7 @@ function DialogBox(props: DialogBoxProps): React.ReactElement {
 			<div className={`dialog-box ${props.className || ''}`}>
 				<div className='dialog-box-heading'>
 					<div className='dialog-box-title'>{props.title}</div>
-					<div className='dialog-box-close' onClick={props.onClose}>
-						<span className='material-icons'>close</span>
-					</div>
+					<IconButton icon='close' type='discreet' onClick={props.onClose} size={24} className='dialog-box-close' color='#000000'></IconButton>
 				</div>
 				<div className='dialog-box-body'>
 					{props.children}
