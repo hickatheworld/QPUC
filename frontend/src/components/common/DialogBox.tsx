@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../style/DialogBox.css';
+import '../../style/common/DialogBox.css';
 import IconButton from './IconButton';
 
 function DialogBox(props: DialogBoxProps): React.ReactElement {

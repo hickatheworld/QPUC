@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import IQuestion from '../../types/IQuestion';
-import '../../style/QuestionEditor.css';
+import '../../style/AdminPanel/QuestionEditor.css';
 import DialogBox from '../common/DialogBox';
 import Button from '../common/Button';
 

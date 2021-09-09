@@ -1,7 +1,7 @@
 import React from 'react';
 import IQuestion from '../../types/IQuestion';
 import QuestionCard from './QuestionCard';
-import '../../style/QuestionsList.css';
+import '../../style/AdminPanel/QuestionsList.css';
 import IconButton from '../common/IconButton';
 
 function QuestionsList(props: QuestionsListProps): React.ReactElement {

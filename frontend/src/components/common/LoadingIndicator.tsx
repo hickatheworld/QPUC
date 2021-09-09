@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../style/LoadingIndicator.css';
+import '../../style/common/LoadingIndicator.css';
 function LoadingIndicator(props: LoadingIndicatorProps): React.ReactElement {
 	const s = props.size || 8;
 	const css = { width: `${s}px`, height: `${s}px`, margin: `0px ${s / 4}px`, background: props.color || '#ffffff' };

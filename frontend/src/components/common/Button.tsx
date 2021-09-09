@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import LoadingIndicator from './LoadingIndicator';
-import '../../style/Button.css';
+import '../../style/common/Button.css';
 
 function Button(props: ButtonProps): React.ReactElement {
 	const [buttonCSS, setButtonCSS] = useState({

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React from 'react';
-import '../../style/AdminPanel.css';
+import '../../style/AdminPanel/AdminPanel.css';
 import IQuestion from '../../types/IQuestion';
 import Button from '../common/Button';
 import QuestionEditor from './QuestionEditor';

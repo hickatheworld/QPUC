@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../style/QuestionCard.css';
+import '../../style/AdminPanel/QuestionCard.css';
 import IQuestion from '../../types/IQuestion';
 import IconButton from '../common/IconButton';
 

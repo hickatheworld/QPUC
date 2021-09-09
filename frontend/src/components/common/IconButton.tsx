@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../../style/IconButton.css';
+import '../../style/common/IconButton.css';
 import LoadingIndicator from './LoadingIndicator';
 
 function Button(props: IconButtonProps): React.ReactElement {
