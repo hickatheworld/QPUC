@@ -61,6 +61,7 @@ function QuestionEditor(props: QuestionEditorProps): React.ReactElement {
 				<Button className='validate-question'
 					backgroundColor='#6802be' textColor='#fff'
 					onClick={(props.mode === 'create' ? add : edit)}
+					loading={props.loading}
 				>
 					{props.mode === 'create' ? 'Ajouter' : 'Éditer'}
 				</Button>
@@ -83,6 +84,10 @@ interface QuestionEditorProps {
 	 * Makes an API call to edit the question.
 	 */
 	edit: (q: IQuestion) => void;
+	/**
+	 * Whether an action is loading in the editor.
+	 */
+	loading: boolean;
 	/**
 	 * The mode of the editor. Can be:
 	 *  - `create`: To add a question to the database.

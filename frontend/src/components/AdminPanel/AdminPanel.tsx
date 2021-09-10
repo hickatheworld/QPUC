@@ -13,10 +13,11 @@ class AdminPanel extends React.Component<{}, AdminPanelState> {
 		super(props);
 		this.state = {
 			connected: false,
+			connecting: false,
 			credentials: null,
-			conFailed: false,
 			editorProps: {
-				mode: 'hidden'
+				mode: 'hidden',
+				loading: false
 			},
 			questions: null
 		};
@@ -27,6 +28,7 @@ class AdminPanel extends React.Component<{}, AdminPanelState> {
 	 * Connects to API and loads questions.
 	 */
 	async connect() {
+		this.setState({ connecting: true });
 		const username = this.usernameRef.current!.value;
 		const password = this.passwordRef.current!.value;
 		try {
@@ -38,8 +40,9 @@ class AdminPanel extends React.Component<{}, AdminPanelState> {
 			// If wrong credentials are given, this will throw an Error due to 401 HTTP response.
 			this.setState({
 				connected: true,
+				connecting: false,
 				credentials: { username, password },
-				conFailed: false
+				failMessage: ''
 			});
 			const questions = await axios.get(`${process.env.REACT_APP_API_URI}/questions/get`, {
 				headers: {
@@ -47,8 +50,11 @@ class AdminPanel extends React.Component<{}, AdminPanelState> {
 				}
 			});
 			this.setState({ questions: questions.data });
-		} catch (_) {
-			this.setState({ conFailed: true });
+		} catch (err: any) {
+			this.setState({
+				failMessage: (err.message === 'Network Error') ? 'Connexion au serveur impossible.' : 'Nom d\'utilisateur ou mot de passe incorrect.',
+				connecting: false
+			});
 		}
 	}
 
@@ -78,10 +84,11 @@ class AdminPanel extends React.Component<{}, AdminPanelState> {
 	}
 
 	async openEditEditor(question: IQuestion) {
-		this.setState({ editorProps: { question, mode: 'edit' } });
+		this.setState({ editorProps: { question, mode: 'edit', loading: false } });
 	}
 
 	async addQuestion(question: IQuestion): Promise<void> {
+		this.setState({ editorProps: { ...this.state.editorProps, loading: true } });
 		if (!this.state.questions)
 			return;
 		try {
@@ -94,14 +101,15 @@ class AdminPanel extends React.Component<{}, AdminPanelState> {
 			});
 			const questions = this.state.questions;
 			questions.push(res.data.question);
-			this.setState({ editorProps: { mode: 'hidden' }, questions });
+			this.setState({ editorProps: { mode: 'hidden', loading: false }, questions });
 			return;
 		} catch (_) {
-			return;
+			this.setState({ editorProps: { ...this.state.editorProps, loading: false } });
 		}
 	}
 
 	async editQuestion(question: IQuestion): Promise<void> {
+		this.setState({ editorProps: { ...this.state.editorProps, loading: true } });
 		if (!this.state.questions)
 			return;
 		try {
@@ -115,13 +123,14 @@ class AdminPanel extends React.Component<{}, AdminPanelState> {
 			const questions = this.state.questions;
 			const i = questions.findIndex(q => q.id === question.id);
 			questions[i] = question;
-			this.setState({ editorProps: { mode: 'hidden' }, questions });
+			this.setState({ editorProps: { mode: 'hidden', loading: false }, questions });
 		} catch (_) {
+			this.setState({ editorProps: { ...this.state.editorProps, loading: false } });
 		}
 	}
 
 	closeEditor(): void {
-		this.setState({ editorProps: { mode: 'hidden' } });
+		this.setState({ editorProps: { mode: 'hidden', loading: false } });
 	}
 
 	render() {
@@ -154,10 +163,10 @@ class AdminPanel extends React.Component<{}, AdminPanelState> {
 					<img src='/assets/main-logo.png' alt='TLMVPSC' className='admin-panel-logo' />
 					<div className='admin-panel-title'>Panneau Administrateur</div>
 					<div className='credentials-form'>
-						<div className='failed-connection' style={{ visibility: this.state.conFailed ? 'visible' : 'hidden' }}>Nom d'utilisateur ou mot de passe invalide</div>
+						<div className='failed-connection' style={{ visibility: this.state.failMessage ? 'visible' : 'hidden' }}>{this.state.failMessage}</div>
 						<input type='text' id='username' name='username' ref={this.usernameRef} placeholder={'Nom d\'utilisateur'} />
 						<input type='password' id='password' name='password' ref={this.passwordRef} placeholder='Mot de passe' />
-						<Button onClick={this.connect.bind(this)}>Se connecter</Button>
+						<Button onClick={this.connect.bind(this)} loading={this.state.connecting}>Se connecter</Button>
 					</div>
 				</div>
 			);
@@ -171,13 +180,13 @@ export default AdminPanel;
  */
 interface AdminPanelState {
 	/**
-	 * Wether an attempt to connect has been done and has failed.
-	 */
-	conFailed: boolean;
-	/**
 	 * Whether the component has correct credentials for  the API.
 	 */
 	connected: boolean;
+	/**
+	 * Whether the serveris being requested to login.
+	 */
+	connecting: boolean;
 	/**
 	 * The credentials used to request the API.
 	 */
@@ -185,7 +194,11 @@ interface AdminPanelState {
 	/**
 	 * Props of the QuestionEditor.
 	 */
-	editorProps: { question?: IQuestion, mode: 'create' | 'edit' | 'hidden' };
+	editorProps: { question?: IQuestion, mode: 'create' | 'edit' | 'hidden', loading: boolean };
+	/**
+	 * A message explaining why the last login attempt failed.
+	 */
+	failMessage?: string;
 	/**
 	 * Questions loaded in the AdminPanel.
 	 */
