@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEventHandler, MouseEvent } from 'react';
 import '../../style/common/DialogBox.css';
 import IconButton from './IconButton';
 
@@ -7,8 +7,12 @@ function DialogBox(props: DialogBoxProps): React.ReactElement {
 		if (props.visible && e.key === 'Escape' && typeof props.onClose === 'function')
 			props.onClose();
 	});
+	const clickHandler: MouseEventHandler = (e: any) => {
+		if (e.target.classList.contains('blur-container') && props.onClose)
+			props.onClose();
+	};
 	return (
-		<div className={`blur-container ${!props.visible && 'hidden'}`}>
+		<div className={`blur-container ${!props.visible && 'hidden'}`} onClick={clickHandler}>
 			<div className={`dialog-box ${props.className || ''}`}>
 				<div className='dialog-box-heading'>
 					<div className='dialog-box-title'>{props.title}</div>
