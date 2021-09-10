@@ -37,7 +37,7 @@ function QuestionEditor(props: QuestionEditorProps): React.ReactElement {
 	}
 	return (
 		<DialogBox
-			title={props.mode == 'create' ? 'Ajouter une question' : 'Éditer une question'}
+			title={props.mode === 'create' ? 'Ajouter une question' : 'Éditer une question'}
 			visible={props.mode !== 'hidden'}
 			className='question-editor'
 			onClose={props.close}
