@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, MouseEvent } from 'react';
+import React, { MouseEventHandler } from 'react';
 import '../../style/common/DialogBox.css';
 import IconButton from './IconButton';
 
