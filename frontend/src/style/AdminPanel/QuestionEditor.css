@@ -1,0 +1,30 @@
+.question-editor .question-editor-form-title {
+	font: 14pt 'Montserrat Alternates';
+	color: #000;
+	margin: 10px 0;
+}
+
+.question-editor .question-editor-form input {
+	color: #000;
+	border-color: #000;
+	margin: 10px;
+	width: 200px;
+}
+
+.question-editor .question-editor-form input[name='statement'] {
+	width: 80%;
+}
+
+.question-editor .question-editor-form input::placeholder {
+	color: #000;
+}
+
+.question-editor .question-editor-form .question-editor-answers {
+	display: flex;
+	flex-direction: column;
+}
+
+.question-editor .question-editor-form .validate-question {
+	margin-left: auto;
+	margin-right: 0;
+}
