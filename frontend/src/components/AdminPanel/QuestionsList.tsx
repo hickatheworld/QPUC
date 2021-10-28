@@ -7,7 +7,7 @@ import IconButton from '../common/IconButton';
 function QuestionsList(props: QuestionsListProps): React.ReactElement {
 	return (
 		<div className='questions-list'>
-			<div className='questions-list-title'>Questions</div>
+			<div className='admin-panel-category-title'>Questions</div>
 			<IconButton icon='add' onClick={props.openCreateEditor} size={36} className='add-question'></IconButton>
 			{(props.questions) ?
 				(props.questions.length === 0) ?

@@ -20,6 +20,11 @@
 	margin-bottom: 10px;
 }
 
+.admin-panel-category-title {
+	font: 44pt 'Candice';
+	text-align: center;
+}
+
 .credentials-form {
 	width: 100%;
 	margin: 15px 0;
@@ -38,6 +43,6 @@
 	font-size: clamp(0.5rem, -0.875rem + 8vw, 1.5rem);
 }
 
-.credentials-form button {
+.credentials-form .button>.button-text {
 	font-size: clamp(1.0rem, -0.875rem + 8vw, 1.55rem);
 }

@@ -18,11 +18,6 @@
 	position: relative;
 }
 
-.questions-list-title {
-	font: 44pt 'Candice';
-	text-align: center;
-}
-
 .questions-list .add-question {
 	display: inline-flex;
 	align-self: center;

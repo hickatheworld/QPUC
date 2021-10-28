@@ -1,6 +1,6 @@
 @font-face {
 	font-family: 'Candice';
-	src: url('./CANDY.ttf');
+	src: url('./CANDY.ttf'), format('font-ttf');
 	font-weight: normal;
 	font-style: normal;
 }
