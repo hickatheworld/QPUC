@@ -1,8 +1,11 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
+    "moduleResolution": "node",
     "esModuleInterop": true,
     "outDir": "build",
-    "rootDir": "src"
-  },
+    "rootDir": "src",
+    "downlevelIteration": true,
+    "importHelpers": true
+  }
 }

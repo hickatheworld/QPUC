@@ -1,20 +1,12 @@
 import { createServer } from 'http';
-import { Socket, Server } from 'socket.io';
+import { Socket } from 'socket.io';
+import SocketServer from './lib/SocketServer';
 
 const server = createServer();
-const io = new Server(server, {
+const io = new SocketServer(server, {
 	cors: {
 		origin: '*',
 		methods: ['GET', 'POST']
 	}
 });
-
-io.on('connection', (socket: Socket) => {
-	console.log('Connection.');
-	socket.on('rick-server', () => {
-		console.log('Never gonna give you up.');
-		socket.emit('rick-client');
-	});
-});
-
 io.listen(3030);
